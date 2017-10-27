@@ -20,7 +20,7 @@ jobs:
 
       - restore_cache:
           key: gems-{{ checksum "Gemfile.lock" }}
-      - run: bundle isntall --path vendor/bundle
+      - run: bundle install --path vendor/bundle
       - save_cache:
           paths:
             - ./vendor/bundle
