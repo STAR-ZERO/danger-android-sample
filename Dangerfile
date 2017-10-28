@@ -25,7 +25,7 @@ require 'shellwords'
 system "./gradlew assembleDebug"
 o, e, s = Open3.capture3("apkanalyzer -h dex references app/build/outputs/apk/debug/app-debug.apk")
 if s.success?
-  message = "#### method references\n\n"
+  message = "#### Number of method references\n\n"
   message << "| Dex file | count |\n"
   o.each_line do |line|
     v = line.chomp.split(" ")
@@ -33,6 +33,13 @@ if s.success?
     message << "| #{v[0]} | #{v[1]} |"
   end
   markdown(message)
+else
+  fail(e)
+end
+
+o, e, s = Open3.capture3("apkanalyzer -h apk file-size app/build/outputs/apk/debug/app-debug.apk")
+if s.success?
+  message(o)
 else
   fail(e)
 end
