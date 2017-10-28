@@ -39,7 +39,10 @@ end
 
 o, e, s = Open3.capture3("apkanalyzer -h apk file-size app/build/outputs/apk/debug/app-debug.apk")
 if s.success?
-  message(o)
+  message = "#### APK file size\n\n"
+  message << "| size |\n"
+  message << "| --- |\n"
+  message << "| #{o} |\n"
 else
   fail(e)
 end
