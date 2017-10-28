@@ -23,6 +23,17 @@ require 'open3'
 require 'shellwords'
 
 system "./gradlew assembleDebug"
+o, e, s = Open3.capture3("apkanalyzer -h apk file-size app/build/outputs/apk/debug/app-debug.apk")
+if s.success?
+  message = "#### APK file size\n\n"
+  message << "| size |\n"
+  message << "| --- |\n"
+  message << "| #{o.chomp} |\n"
+  markdown(message)
+else
+  fail(e)
+end
+
 o, e, s = Open3.capture3("apkanalyzer -h dex references app/build/outputs/apk/debug/app-debug.apk")
 if s.success?
   message = "#### Number of method references\n\n"
@@ -37,13 +48,3 @@ else
   fail(e)
 end
 
-o, e, s = Open3.capture3("apkanalyzer -h apk file-size app/build/outputs/apk/debug/app-debug.apk")
-if s.success?
-  message = "#### APK file size\n\n"
-  message << "| size |\n"
-  message << "| --- |\n"
-  message << "| #{o.chomp} |\n"
-  markdown(message)
-else
-  fail(e)
-end
