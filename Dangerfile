@@ -43,6 +43,7 @@ if s.success?
   message << "| size |\n"
   message << "| --- |\n"
   message << "| #{o} |\n"
+  markdown(message)
 else
   fail(e)
 end
