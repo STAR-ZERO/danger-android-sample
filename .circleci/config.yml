@@ -26,14 +26,14 @@ jobs:
             - ./vendor/bundle
           key: gems-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
+#      - run:
+#          name: Run Tests
+#          command: ./gradlew lint test
 
       - run: bundle exec danger
 
-      - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_test_results:
-          path: app/build/test-results
+#      - store_artifacts:
+#          path: app/build/reports
+#          destination: reports
+#      - store_test_results:
+#          path: app/build/test-results
