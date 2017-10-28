@@ -42,7 +42,7 @@ if s.success?
   message = "#### APK file size\n\n"
   message << "| size |\n"
   message << "| --- |\n"
-  message << "| #{o} |\n"
+  message << "| #{o.chomp} |\n"
   markdown(message)
 else
   fail(e)
