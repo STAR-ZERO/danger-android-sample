@@ -15,36 +15,8 @@
 #android_lint.report_file = "app/build/reports/lint-results.xml"
 #android_lint.lint
 
-
-#apkanalyzer.apk_file = "app/build/outputs/apk/debug/app-debug.apk"
-#apkanalyzer.dex_references
-
-require 'open3'
-require 'shellwords'
-
-system "./gradlew assembleDebug"
-o, e, s = Open3.capture3("apkanalyzer -h apk file-size app/build/outputs/apk/debug/app-debug.apk")
-if s.success?
-  message = "#### APK file size\n\n"
-  message << "| size |\n"
-  message << "| --- |\n"
-  message << "| #{o.chomp} |\n"
-  markdown(message)
-else
-  fail(e)
-end
-
-o, e, s = Open3.capture3("apkanalyzer -h dex references app/build/outputs/apk/debug/app-debug.apk")
-if s.success?
-  message = "#### Number of method references\n\n"
-  message << "| Dex file | count |\n"
-  o.each_line do |line|
-    v = line.chomp.split(" ")
-    message << "| --- | --- |\n"
-    message << "| #{v[0]} | #{v[1]} |"
-  end
-  markdown(message)
-else
-  fail(e)
-end
+apkanalyzer.apk_file = "app/build/outputs/apk/debug/app-debug.apk"
+apkanalyzer.file_size
+apkanalyzer.permissions
+apkanalyzer.method_references
 
