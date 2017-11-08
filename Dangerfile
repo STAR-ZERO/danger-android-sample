@@ -1,16 +1,22 @@
 # Sometimes it's a README fix, or something like that - which isn't relevant for
 # including in a project's CHANGELOG for example
-declared_trivial = github.pr_title.include? "#trivial"
+#declared_trivial = github.pr_title.include? "#trivial"
 
 # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
-warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
+#warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
 
 # Warn when there is a big PR
-warn("Big PR") if git.lines_of_code > 500
+#warn("Big PR") if git.lines_of_code > 500
 
 # Don't let testing shortcuts get into master by accident
-fail("fdescribe left in tests") if `grep -r fdescribe specs/ `.length > 1
-fail("fit left in tests") if `grep -r fit specs/ `.length > 1
+#fail("fdescribe left in tests") if `grep -r fdescribe specs/ `.length > 1
+#fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 
-android_lint.report_file = "app/build/reports/lint-results.xml"
-android_lint.lint
+#android_lint.report_file = "app/build/reports/lint-results.xml"
+#android_lint.lint
+
+apkanalyzer.apk_file = "app/build/outputs/apk/debug/app-debug.apk"
+apkanalyzer.file_size
+apkanalyzer.permissions
+apkanalyzer.method_references
+
