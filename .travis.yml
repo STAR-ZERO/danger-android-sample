@@ -1,0 +1,20 @@
+language: android
+jdk: oraclejdk8
+sudo: false
+
+android:
+  components:
+    - platform-tools
+    - tools
+    - build-tools-26.0.2
+    - android-26
+    - sys-img-armeabi-v7a-android-26
+    - extra-android-m2repository
+
+before_script:
+  - bundle install
+
+script:
+  - ./gradlew assembleDebug
+  - bundle exec danger
+
