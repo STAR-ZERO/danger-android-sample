@@ -4,12 +4,15 @@ sudo: false
 
 android:
   components:
-    - platform-tools
     - tools
+    - platform-tools
     - build-tools-26.0.2
     - android-26
     - sys-img-armeabi-v7a-android-26
     - extra-android-m2repository
+
+before_install:
+  - yes | sdkmanager tools
 
 before_script:
   - bundle install
